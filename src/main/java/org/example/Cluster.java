@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -14,9 +15,9 @@ public class Cluster {
     public Cluster(List<Student> students) {
         int sizeClusters = 2;
         for (int i = 0; i < sizeClusters; i++) {
-            Student a = students.get(i);
-            clusters.add(new ArrayList<>(List.of(a)));
-            centroids.add(a.toVector());
+            Student student = students.get(i);
+            clusters.add(new ArrayList<>(List.of(student)));
+            centroids.add(student.toVector());
         }
     }
 
@@ -24,8 +25,7 @@ public class Cluster {
         double[] vectorStudent = newStudent.toVector();
         double minDistace = Double.MAX_VALUE;
         int indexCluster = -1;
-
-        for (int i = 0; i < centroids.size(); i++) {
+         for (int i = 0; i < centroids.size(); i++) {
             double distance = calculated(vectorStudent, centroids.get(i));
             if (distance < minDistace) {
                 minDistace = distance;
