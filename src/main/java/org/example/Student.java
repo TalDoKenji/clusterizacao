@@ -4,8 +4,8 @@ public class Student {
 
     private String name;
     private Integer age;
-    private float average;
-    private float absence;
+    private double average;
+    private double absence;
 
     @Override
     public String toString() {
@@ -17,11 +17,19 @@ public class Student {
                 '}';
     }
 
-    public Student(String name, Integer age, float average, float absence) {
+    public Student(String name, Integer age, double average, double absence) {
         this.name = name;
         this.age = age;
         this.average = average;
         this.absence = absence;
+    }
+
+    public double[] toVector() {
+        return new double[] {
+                age,
+                average,
+                absence
+        };
     }
 
     public String getName() {
@@ -32,11 +40,11 @@ public class Student {
         return age;
     }
 
-    public float getAverage() {
+    public double getAverage() {
         return average;
     }
 
-    public float getAbsence() {
+    public double getAbsence() {
         return absence;
     }
 
@@ -48,12 +56,14 @@ public class Student {
         this.age = age;
     }
 
-    public void setAverage(float average) {
+    public void setAverage(double average) {
         this.average = average;
     }
 
-    public void setAbsence(float absence) {
+    public void setAbsence(double absence) {
         this.absence = absence;
     }
+
+
 }
 
