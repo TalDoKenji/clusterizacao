@@ -1,39 +1,29 @@
 package org.example;
 
+import java.util.Comparator;
+import java.util.List;
+
 public class Student {
 
-    private String name;
     private Integer age;
+
     private double average;
-    private double absence;
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", average=" + average +
-                ", absence=" + absence +
-                '}';
-    }
+    private double abscense;
 
-    public Student(String name, Integer age, double average, double absence) {
-        this.name = name;
+    public Student(Integer age, double average, double abscense) {
         this.age = age;
         this.average = average;
-        this.absence = absence;
+        this.abscense = abscense;
     }
 
-    public double[] toVector() {
-        return new double[] {
-                age,
-                average,
-                absence
-        };
-    }
+    public void distanceEuclidienne(Student student, List<Cluster> clusters) {
+        Cluster cluster = clusters.stream()
+                .min(Comparator.comparingDouble(c -> c.calculatedDistance(student, c.getCentroid())))
+                .orElseThrow();
 
-    public String getName() {
-        return name;
+        System.out.println("cluster mais proximo: " + cluster);
+        cluster.addStudent(student);
     }
 
     public Integer getAge() {
@@ -44,26 +34,16 @@ public class Student {
         return average;
     }
 
-    public double getAbsence() {
-        return absence;
+    public double getAbscense() {
+        return abscense;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String toString() {
+        return "Student{" +
+                "age=" + age +
+                ", average=" + average +
+                ", abscense=" + abscense +
+                '}';
     }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public void setAverage(double average) {
-        this.average = average;
-    }
-
-    public void setAbsence(double absence) {
-        this.absence = absence;
-    }
-
-
 }
-
