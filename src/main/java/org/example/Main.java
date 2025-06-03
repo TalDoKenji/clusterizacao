@@ -6,6 +6,9 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+
+        //TODO: a distancia entre um elemento longe do centroid e outro elemento longe do centroid
+        // deve ser menor do que as suas distancias de seus centros
         List<Student> Allstudents = ReadCSV.readCSV("C:/Users/vinic/IdeaProjects/clusterizacao/src/main/java/org/example/fileStudents.csv");
         List<Student> studentsCluster1 = new ArrayList<>();
         List<Student> studentsCluster2 = new ArrayList<>();
@@ -26,7 +29,7 @@ public class Main {
         System.out.println();
 
         Student student = new Student(20, 7.0, 0.2);
-        student.distanceEuclidienne(student,  clusters);
+        student.calculateMinDistanceEuclidienne(clusters);
         System.out.println("cluster 1 : " + cluster1);
         System.out.println("-----------------");
         System.out.println("cluster 2 : " + cluster2);

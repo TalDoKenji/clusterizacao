@@ -17,13 +17,37 @@ public class Student {
         this.abscense = abscense;
     }
 
-    public void distanceEuclidienne(Student student, List<Cluster> clusters) {
+    public static Student of() {
+        return new Student(0, 0, 0);
+    }
+
+    public Student accumule(final Student student) {
+        age += student.getAge();
+        average += student.getAverage();
+        abscense += student.getAbscense();
+
+        return this;
+    }
+
+    public void divide(final int divisor) {
+
+        if (divisor < 1) {
+            throw new IllegalArgumentException("Divisor deve ser maior que 012");
+        }
+
+        age = age / divisor;
+        average = average / divisor;
+        abscense = abscense / divisor;
+    }
+
+    public Cluster calculateMinDistanceEuclidienne(List<Cluster> clusters) {
+
         Cluster cluster = clusters.stream()
-                .min(Comparator.comparingDouble(c -> c.calculatedDistance(student, c.getCentroid())))
+                .min(Comparator.comparingDouble(c -> c.calculatedDistance(this, c.getCentroid())))
                 .orElseThrow();
 
-        System.out.println("cluster mais proximo: " + cluster);
-        cluster.addStudent(student);
+        cluster.addStudent(this);
+        return cluster;
     }
 
     public Integer getAge() {

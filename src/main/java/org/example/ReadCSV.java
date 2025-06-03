@@ -1,13 +1,9 @@
 package org.example;
 
-import org.example.Student;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ReadCSV {
 
@@ -15,8 +11,8 @@ public class ReadCSV {
         try {
             List<String> lines = Files.readAllLines(Paths.get(path));
             return lines.stream().skip(1)
-                    .map(line-> line.split(","))
-                    .map((e)->new Student(Integer.parseInt(e[1]),
+                    .map(line -> line.split(","))
+                    .map((e) -> new Student(Integer.parseInt(e[1]),
                             Double.parseDouble(e[2]),
                             Double.parseDouble(e[3])))
                     .toList();

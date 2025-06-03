@@ -1,39 +1,33 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cluster {
 
     private Student centroid;
 
-    private final List<Student> students;
+    private final List<Student> students = new ArrayList<>();
 
     public Cluster(Student centroid, List<Student> students) {
         this.centroid = centroid;
-        this.students = students;
+        this.students.addAll(students);
     }
 
-    public void recalcuteCentroid(List<Student> students) {
+    public Student recalcutecentroid(List<Student> students) {
+
         int size = students.size();
-        Student sum = students.stream()
-                .reduce(
-                        new Student(0, 0.0, 0.0),
-                        (acc, current) -> new Student(
-                                acc.getAge() + current.getAge(),
-                                acc.getAverage() + current.getAverage(),
-                                acc.getAbscense() + current.getAbscense()
-                        )
-                );
-        this.centroid = new Student(
-                sum.getAge()/size,
-                sum.getAverage()/size,
-                sum.getAbscense()/size
-        );
+        final Student student = students
+                .stream()
+                .reduce(Student.of(), Student::accumule);
+
+        student.divide(size);
+        return this.centroid = student;
     }
 
     public void addStudent(Student newStudent) {
         this.students.add(newStudent);
-        recalcuteCentroid(students);
+        recalcutecentroid(students);
     }
 
     public double calculatedDistance(Student student, Student centroid) {
@@ -43,6 +37,10 @@ public class Cluster {
         sum += Math.pow(student.getAbscense() - centroid.getAbscense(), 2);
 
         return Math.sqrt(sum);
+    }
+
+    public void createCluster(List<Student> students) {
+
     }
 
     public List<Student> getStudents() {
