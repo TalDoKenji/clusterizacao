@@ -12,7 +12,7 @@ public class StudentTest {
 
     @Test
     public void StudentConstructorTest() {
-        Student student = new Student(20, 8.9, 0.9);
+        Student student = new Student(20, 8.9, 0.9, "");
 
         assertNotNull(student);
     }
@@ -20,10 +20,10 @@ public class StudentTest {
     @Test
     public void getCLusterByNewStudent() {
 
-        Student student1 = new Student(20, 6, 0.9);
-        Student student2 = new Student(21, 7, 0.9);
-        Student student3 = new Student(45, 8.6, 0.9);
-        Student student4 = new Student(51, 9, 0.9);
+        Student student1 = new Student(20, 6, 0.9, "");
+        Student student2 = new Student(21, 7, 0.9, "");
+        Student student3 = new Student(45, 8.6, 0.9, "");
+        Student student4 = new Student(51, 9, 0.9, "");
 
         List<Student> studentsCluster1 = List.of(student1, student2);
         List<Student> studentsCluster2 = List.of(student3, student4);
@@ -33,7 +33,7 @@ public class StudentTest {
 
         List<Cluster> clusters = List.of(cluster1, cluster2);
 
-        Student newStudent = new Student(23, 6.5, 0.9);
+        Student newStudent = new Student(23, 6.5, 0.9, "");
         final Cluster cluster = newStudent.calculateMinDistanceEuclidienne(clusters);
 
         assertEquals(cluster, cluster1);
@@ -42,8 +42,8 @@ public class StudentTest {
     @Test
     public void accumulateTest() {
 
-        Student student1 = new Student(20, 6, 0.9);
-        Student student2 = new Student(21, 7, 0.9);
+        Student student1 = new Student(20, 6, 0.9, "");
+        Student student2 = new Student(21, 7, 0.9, "");
 
         final Student studentTotal = student1.accumule(student2);
 
@@ -55,7 +55,7 @@ public class StudentTest {
     @Test
     public void throwExceptionWhenDivisorMenor1() {
 
-        Student student1 = new Student(20, 6, 0.9);
+        Student student1 = new Student(20, 6, 0.9, "");
 
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> student1.divide(0),
@@ -65,7 +65,7 @@ public class StudentTest {
     @Test
     public void divisor() {
 
-        Student student1 = new Student(20, 6, 0.9);
+        Student student1 = new Student(20, 6, 0.9, "");
 
         student1.divide(3);
 
